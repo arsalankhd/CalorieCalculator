@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+<div class="container mt-5 w-100">
+    <div class="card shadow">
+        <div class="card-body">
+            <h2 class="text-center">افزودن وعده غذایی جدید</h2>
+            <form method="post">
+                {% csrf_token %}
+                {% if form.errors %}
+                <ul>
+                    <li style="color: red;">لطفا مقادیر را درست وارد نمایید!</li>
+                </ul>
+                {% endif %}
+                <div class="form-group">
+                    <label for="{{ form.name.id_for_label }}">نام غذا:</label>
+                    {{ form.name|add_class:"form-control mb-2" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.quantity.id_for_label }}">تعداد:</label>
+                    {{ form.quantity|add_class:"form-control mb-2" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.option.id_for_label }}">وعده غذایی:</label>
+                    {{ form.option|add_class:"form-control mb-2" }}
+                </div>
+                <select name="person_of" required="" id="id_person_of" hidden="True">
+                    <option value="{{ user.id }}" selected="">
+                        {{ user.username }}
+                    </option>
+                </select>   
+
+                <button type="submit" class="btn btn-success mt-3">افزودن</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

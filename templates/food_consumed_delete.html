@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5 w-100">
+    <div class="card bg-light">
+        <div class="card-header text-center"><h4><b>حذف وعده غذایی</b></h4></div>
+        <div class="card-body">
+            <h2><b>حذف وعده غذایی مصرف شده</b></h2>
+            <form method="post">
+                {% csrf_token %}
+                <p>آیا از حذف {{ foodconsumed.name }} مطمئن هستید؟</p>
+                <button class="btn btn-danger" type="submit">حذف</button>
+            </form>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

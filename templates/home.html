@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-auto">
+    <div class="row mt-lg-5">
+        <div class="col-xl-6 col-lg-6 col-md-6 mt-lg-5" style="border: 1px hidden gray;">
+            <h2 class="p-2">کالری شمار روزانه</h2>
+            <p class="p-2">با کالری شمار روزانه، مقدار کالری مصرفی روزانه خود را محاسبه و مدیریت کنید و با استفاده از آن به وضعیت ایده آل بدنی خود دست یابید.</p>
+            <a href="{% url 'fooditem_list' %}" type="button" class="herobtn btn btn-lg px-4 me-md-2 btn-success">بزن بریم!</a>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 mt-lg-5" style="border: 1px hidden gray;">
+            <img src="{% static 'images/heart-healthy-diet.jpg' %}" alt="healthy-diet" class="img-fluid">
+        </div>
+    </div>
+</div>
+{% endblock content %}

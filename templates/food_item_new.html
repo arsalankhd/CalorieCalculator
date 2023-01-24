@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="container mt-5 w-100">
+    <div class="card shadow">
+        <div class="card-body">
+            <h2 class="text-center">افزودن غذای جدید</h2>
+            <form method="post">
+                {% csrf_token %}
+                {% if form.errors %}
+                <ul>
+                    <li style="color: red;">لطفا مقادیر را درست وارد نمایید!</li>
+                </ul>
+                {% endif %}
+                <select name="person_of" required id="id_person_of" hidden="True">
+                    <option value="{{user.id}}" selected>{{user.username}}</option>
+                </select>
+                <div id="div_id_name" class="form-group">
+                    <label for="id_name" class="requiredField">
+                        نام غذا<span class="asteriskField">*</span></label>
+                    <div class="">
+                        <input type="text" name="name" maxlength="200" autofocus="" class="textinput textInput form-control" required id="id_name"> 
+                    </div> 
+                </div> 
+                <div id="div_id_calorie" class="form-group"> 
+                    <label for="id_calorie" class="">مقدار کالری:</label> 
+                    <div class=""> 
+                        <input type="number" class="numberinput form-control" name="calorie" value="100.0" step="1" id="id_calorie"> 
+                    </div> 
+                </div>
+
+                <button type="submit" class="btn btn-success mt-3">ثبت</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

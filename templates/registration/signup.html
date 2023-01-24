@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Sign Up{% endblock title %}
+{% block content %}
+<div class="container mt-5 w-100">
+    <div class="card shadow">
+        <div class="card-body">
+            <h2 class="text-center">ایجاد حساب کاربری</h2>
+            <form method="post">
+                {% csrf_token %}
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger alert-dismissible fade show"> {{ error}}
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+                <div id="div_id_username" class="form-group">
+                    <label for="id_username" class=" requiredField">
+                        نام کاربری<span class="asteriskField">*</span></label>
+                    <div class="">
+                        <input type="text" name="username" maxlength="200" autofocus="" class="textinput textInput form-control" required id="id_username"> 
+                    </div> 
+                </div> 
+                <div id="div_id_email" class="form-group"> 
+                    <label for="id_email" class="">ایمیل :</label> 
+                    <div class=""> 
+                        <input type="email" name="email" maxlength="254" class="emailinput form-control" id="id_email"> 
+                    </div> 
+                </div> 
+                <div id="div_id_calorie_goal" class="form-group"> 
+                    <label for="id_calorie_goal" class="">کالری مصرفی روزانه هدف :</label> 
+                    <div class=""> 
+                        <input type="number" class="numberinput form-control" name="calorie_goal" value="1000.0" step="1" id="id_calorie_goal"> 
+                    </div> 
+                </div> 
+                <div id="div_id_password1" class="form-group"> 
+                    <label for="id_password1" class=" requiredField">
+                        کلمه عبور<span class="asteriskField">*</span> 
+                    </label> 
+                    <div class=""> 
+                        <input type="password" name="password1" autocomplete="new-password" class="textinput textInput form-control" required id="id_password1" aria-autocomplete="list"> 
+                        <small id="hint_id_password1" class="form-text text-muted">
+                            <ul>
+                                <li>رمز عبور شما باید حداقل 8 کاراکتر داشته باشد.</li>
+                                <li>رمز عبور شما باید شامل حروف و عدد باشد.</li>
+                            </ul>
+                        </small> 
+                    </div> 
+                </div> 
+                <div id="div_id_password2" class="form-group"> 
+                    <label for="id_password2" class=" requiredField">تکرار کلمه عبور
+                        <span class="asteriskField">*</span> 
+                    </label> 
+                    <div class=""> 
+                        <input type="password" name="password2" autocomplete="new-password" class="textinput textInput form-control" required id="id_password2"> 
+                    </div> 
+                </div>
+
+                <button type="submit" class="btn btn-success mt-3">ثبت نام</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

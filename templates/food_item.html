@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5 w-100">
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">
+            <strong>{{ user.username }} عزیز، در اینجا میتوانید لیست غذا های خود را مشاهده کنید!</strong>
+        </h4>
+        میتوانید غذا های خود را تغییر و در صورت نیاز غذا های جدید به لیست اضافه کنید.
+        در ضمن میتوانید از طریق منوی بالای صفحه و یا دکمه زیر وارد حساب کاربری خود شوید.
+        <a href="{% url 'profile' %}" class="btn btn-dark mt-2">وارد شدن به حساب</a>
+    </div>
+    <div class="card bg-light">
+        <div class="card-header text-center"><h4><b>غذا های شما</b></h4></div>
+        <div class="card-body">
+            <a href="{% url 'fooditem_new' %}" class="w-50 mt-2 mb-2 btn btn-success button1" style="background-color:#4ef18f;"><i class="bi bi-plus-square"></i>افرودن غذای جدید</a>
+            <div class="table-responsive" style="height: 600px; overflow: auto;">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">نام غذا</th>
+                            <th scope="col">کالری</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for foodItem in foodItemList %}
+                            <tr class="table-info">
+                                <td>{{ foodItem.name }}</td>
+                                <td>{{ foodItem.calorie }}</td>
+                                <td>
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <a href="{% url 'fooditem_edit' foodItem.pk %}" class="btn btn-warning"><i class="fa fa-refresh"></i> بروزرسانی</a>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <a href="{% url 'fooditem_delete' foodItem.pk %}" class="btn btn-danger"><i class="bi bi-trash"></i> حذف</a>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

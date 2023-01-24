@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5 w-100">
+    <div class="card shadow">
+        <div class="card-body">
+            <h2 class="text-center">تغییر کالری روزانه هدف</h2>
+            <form method="post">
+                {% csrf_token %}
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-danger alert-dismissible fade show"> {{ error}}
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+                <div id="div_id_calorie_goal" class="form-group"> 
+                    <label for="id_calorie_goal" class="">کالری مصرفی روزانه هدف :</label> 
+                    <div class=""> 
+                        <input type="number" class="numberinput form-control" name="calorie_goal" value="0.0" step="1" id="id_calorie_goal"> 
+                    </div> 
+                </div>
+
+                <button type="submit" class="btn btn-success mt-3">ثبت</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
