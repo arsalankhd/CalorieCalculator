@@ -11,6 +11,7 @@ from django.views.generic.edit import (
 from datetime import date, datetime, timedelta
 from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .filters import FoodItemFilter
 
 @login_required(login_url='login')
 def FoodItemListView(request):
@@ -55,8 +56,12 @@ def FoodItemListView(request):
         food = foodItem(name='گوشت سینه مرغ (۱۰۰ گرم)', calorie='172', person_of=request.user)
         food.save()
 
+    myFilter = FoodItemFilter(request.GET,queryset=foodItemList)
+    foodItemList = myFilter.qs
+
     context = {
         'foodItemList' : foodItemList,
+        'myFilter': myFilter,
     }
 
     return render(request, 'food_item.html', context)
